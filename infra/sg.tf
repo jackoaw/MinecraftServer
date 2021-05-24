@@ -14,6 +14,16 @@ resource "aws_security_group_rule" "mc_ingress_rules" {
   security_group_id = aws_security_group.ec2_sg.id
 }
 
+resource "aws_security_group_rule" "mc_egress_rules" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = -1
+  cidr_blocks       = ["0.0.0.0/0"]
+  description       = "allow all traffic out"
+  security_group_id = aws_security_group.ec2_sg.id
+}
+
 variable "sg_ingress_rules" {
     type        = map(map(any))
     default     = {
